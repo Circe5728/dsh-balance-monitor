@@ -107,6 +107,20 @@ export function apply(ctx, config = {}) {
   let dirty = false
   let saveTimer = null
   let stopped = false
+  let markStorageReady = null
+  const storageReady = new Promise((resolve) => {
+    const timer = setTimeout(() => {
+      if (markStorageReady !== null) {
+        markStorageReady = null
+        resolve()
+      }
+    }, 3000)
+    markStorageReady = () => {
+      clearTimeout(timer)
+      markStorageReady = null
+      resolve()
+    }
+  })
 
   const currentDay = () => {
     const day = localDay()
@@ -238,7 +252,9 @@ export function apply(ctx, config = {}) {
 
   ctx.inject(['storage'], (storageCtx) => {
     const epoch = ++storageEpoch
-    void openStorage(storageCtx.storage, epoch)
+    void openStorage(storageCtx.storage, epoch).finally(() => {
+      if (markStorageReady !== null) markStorageReady()
+    })
     return async () => {
       storageEpoch += 1
       const unit = storageUnit
@@ -314,6 +330,7 @@ export function apply(ctx, config = {}) {
               response.end('invalid envelope')
               return
             }
+            await storageReady
             const result = { ok: true, value: snapshot() }
             response.writeHead(200, { 'content-type': 'application/json' })
             response.end(JSON.stringify({ type: 'server-response', rpcId: message.rpcId, result }))

@@ -1,6 +1,6 @@
 {
   "name": "@local/dsh-balance-monitor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
   "description": "Sidebar wallet entry and draggable, pinnable balance/token-consumption window for DeepSeek accounts",

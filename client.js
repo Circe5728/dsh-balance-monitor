@@ -401,6 +401,7 @@ window.__ModuleLoader__.load({
       let generation = 0;
       let disposed = false;
       let timer = null;
+      let startupRetryTimer = null;
       let visibilityHandler = null;
       let cachedProfile = null;
       let profileInFlight = null;
@@ -553,6 +554,10 @@ window.__ModuleLoader__.load({
       const start = () => {
         disposed = false;
         void refresh();
+        startupRetryTimer = window.setTimeout(() => {
+          startupRetryTimer = null;
+          if (!disposed) void refresh();
+        }, 2000);
         visibilityHandler = () => {
           if (!document.hidden) void refresh();
         };
@@ -570,6 +575,10 @@ window.__ModuleLoader__.load({
         if (timer !== null) {
           window.clearInterval(timer);
           timer = null;
+        }
+        if (startupRetryTimer !== null) {
+          window.clearTimeout(startupRetryTimer);
+          startupRetryTimer = null;
         }
         if (visibilityHandler !== null) {
           document.removeEventListener('visibilitychange', visibilityHandler);

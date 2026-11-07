@@ -121,6 +121,7 @@ cost = (input × input价 + cacheRead × cacheRead价
   - 其他平台：`$DSH_HOME/storages/balance_monitor_v3.json`
 - 内容是可读 JSON：`today`、`total`、`day`、`since`、`updatedAt`。
 - 今日在本地零点后第一次记录 / 读取快照时清零；累计保留。
+- 同一天内重启 DSH / 重新加载插件：Host 先从账本恢复 `today` 与 `total`，再返回第一个快照，不会清零今日。
 - 浏览器侧只保存窗口状态：
   - `localStorage["dsh-balance-monitor.window.v1"]`
   - 字段：`pinned`、`position { left, top }`。
@@ -216,6 +217,7 @@ DSH 的 HMR 对 **Host 模块**采用“改动模块保持旧代码直到重启�
 - **今日 / 累计 token**：provider 实际返回的 usage 累计；包含子代理、压缩、标题生成等所有经过 `llm/stream` 的调用。
 - **估算金额**：按上表单价估算，**不是**平台账单；不包含折扣、赠送额度、调价、充值赠送等。
 - **今日**：Host 本地时区日期；跨零点后第一次记录 / 读取快照时归零。
+- **重启**：同一天内重启 DSH / 重新加载插件不会清零今日；Host 会等账本加载完再返回第一个快照。跨日重启仍按新的一天归零。
 - **未登录 / 网络不可达**：余额显示错误或「未登录」；token 统计是 Host 本地的，仍可显示（只要 Host 在运行）。
 - **Provider 未返回 usage**：该次调用不会计入 token；不会凭空估算 token。
 - **首次安装**：今日与累计从安装后第一次模型调用开始累计；不会回溯安装前的历史。
