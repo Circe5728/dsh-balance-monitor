@@ -1,0 +1,4 @@
+- insert:
+    - id: balance-monitor
+      name: '@local/dsh-balance-monitor'
+      config: {}

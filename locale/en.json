@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Balance & Token Monitor",
+    "description": "Adds a wallet entry at the sidebar foot and a draggable, pinnable window showing the DeepSeek balance total, today's and cumulative token usage, and an estimated amount."
+  }
+}

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Balance monitor">
+  <defs>
+    <linearGradient id="bm-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4d6bfe"/>
+      <stop offset="1" stop-color="#1d3fbf"/>
+    </linearGradient>
+    <linearGradient id="bm-coin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe29a"/>
+      <stop offset="1" stop-color="#e8a712"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#bm-bg)"/>
+  <rect x="13" y="21" width="35" height="24" rx="7" fill="#ffffff" fill-opacity="0.16" stroke="#ffffff" stroke-opacity="0.92" stroke-width="2"/>
+  <path d="M13 27h23" stroke="#ffffff" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round"/>
+  <path d="M48 31h3a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-3" fill="#ffffff" fill-opacity="0.28" stroke="#ffffff" stroke-opacity="0.8" stroke-width="2" stroke-linejoin="round"/>
+  <circle cx="43" cy="36" r="9" fill="url(#bm-coin)" stroke="#b97c05" stroke-width="1.5"/>
+  <path d="M43 31v10M39 31l4 5 4-5M39 37h8" fill="none" stroke="#7a5102" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
